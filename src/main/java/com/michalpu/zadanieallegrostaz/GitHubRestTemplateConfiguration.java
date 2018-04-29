@@ -14,7 +14,7 @@ public class GitHubRestTemplateConfiguration {
     public RestTemplate gitHubRestTemplate(
             @Value("${gitHub.client.connectionTimeout}") int connectionTimeout,
             @Value("${gitHub.client.connectionRequestTimeout}") int connectionRequestTimeout,
-            @Value("${gitHub.client.ReadTimeout}") int readTimeout){
+            @Value("${gitHub.client.ReadTimeout}") int readTimeout) {
         RestTemplate restTemplate = new RestTemplate(httpFactory(
                 connectionTimeout,
                 connectionRequestTimeout,
@@ -24,7 +24,7 @@ public class GitHubRestTemplateConfiguration {
 
     private HttpComponentsClientHttpRequestFactory httpFactory(int connectionTimeout,
                                                                int connectionRequestTimeout,
-                                                               int readTimeout){
+                                                               int readTimeout) {
         HttpComponentsClientHttpRequestFactory requestConfig = new HttpComponentsClientHttpRequestFactory();
         requestConfig.setConnectTimeout(connectionTimeout);
         requestConfig.setConnectionRequestTimeout(connectionRequestTimeout);
@@ -33,7 +33,7 @@ public class GitHubRestTemplateConfiguration {
         return requestConfig;
     }
 
-    private org.apache.http.client.HttpClient httpClient(){
+    private org.apache.http.client.HttpClient httpClient() {
         return HttpClientBuilder.create()
                 .setMaxConnTotal(10)
                 .setMaxConnPerRoute(5)

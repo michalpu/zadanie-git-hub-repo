@@ -3,12 +3,17 @@ package com.michalpu.zadanieallegrostaz;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class Repo implements Comparable{
+public class Repo implements Comparable {
 
     private String name;
     private String updated_at;
 
     public Repo() {
+    }
+
+    public Repo(String name, String updated_at) {
+        this.name = name;
+        this.updated_at = updated_at;
     }
 
     public String getName() {
@@ -29,7 +34,7 @@ public class Repo implements Comparable{
 
     @Override
     public int compareTo(Object o) {
-        return this.getUpdated_at().compareTo(((Repo)o).getUpdated_at());
+        return this.getUpdated_at().compareTo(((Repo) o).getUpdated_at());
     }
 
     @Override

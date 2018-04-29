@@ -15,24 +15,24 @@ public class RepoService {
         this.versionControlClient = versionControlClient;
     }
 
-    public Repo getNewestRepo(){
+    public Repo getNewestRepo() {
         Repo[] repos = versionControlClient.getRepos();
         List<Repo> reposList = Arrays.asList(repos);
         reposList.sort(Collections.reverseOrder());
-        return  reposList.get(0);
+        return reposList.get(0);
     }
 
-    public List<Repo> getRepos(){
+    public List<Repo> getRepos() {
         Repo[] repos = versionControlClient.getRepos();
         List<Repo> reposList = Arrays.asList(repos);
         return reposList;
     }
 
-    public List<Repo> getSortedRepos(){
+    public List<Repo> getSortedRepos() {
         Repo[] repos = versionControlClient.getRepos();
         List<Repo> reposList = Arrays.asList(repos);
         reposList.sort(Collections.reverseOrder());
-        return  reposList;
+        return reposList;
     }
 
 }

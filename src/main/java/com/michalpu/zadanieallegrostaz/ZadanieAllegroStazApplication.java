@@ -13,7 +13,7 @@ import org.springframework.web.client.RestTemplate;
 @SpringBootApplication
 public class ZadanieAllegroStazApplication {
 
-	public static void main(String[] args) {
-		SpringApplication.run(ZadanieAllegroStazApplication.class, args);
-	}
+    public static void main(String[] args) {
+        SpringApplication.run(ZadanieAllegroStazApplication.class, args);
+    }
 }

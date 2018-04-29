@@ -14,17 +14,17 @@ public class RepoController {
     }
 
     @GetMapping("/repos")
-    public List<Repo> getRepos(){
+    public List<Repo> getRepos() {
         return repoService.getRepos();
     }
 
     @GetMapping("/repos/sorted")
-    public List<Repo> getSortedRepos(){
+    public List<Repo> getSortedRepos() {
         return repoService.getSortedRepos();
     }
 
     @GetMapping("/repos/newest")
-    public Repo getNewestRepo(){
+    public Repo getNewestRepo() {
         return repoService.getNewestRepo();
     }
 }
