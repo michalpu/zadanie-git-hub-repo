@@ -14,29 +14,36 @@ public class GitHubRestTemplateConfiguration {
     public RestTemplate gitHubRestTemplate(
             @Value("${gitHub.client.connectionTimeout}") int connectionTimeout,
             @Value("${gitHub.client.connectionRequestTimeout}") int connectionRequestTimeout,
-            @Value("${gitHub.client.ReadTimeout}") int readTimeout) {
+            @Value("${gitHub.client.ReadTimeout}") int readTimeout,
+            @Value("${gitHub.client.maxConnectionTotal}") int maxConnectionTotal,
+            @Value("${gitHub.client.maxConnectionPerRoute}") int maxConnectionPerRoute) {
         RestTemplate restTemplate = new RestTemplate(httpFactory(
                 connectionTimeout,
                 connectionRequestTimeout,
-                readTimeout));
+                readTimeout,
+                maxConnectionTotal,
+                maxConnectionPerRoute));
         return restTemplate;
     }
 
     private HttpComponentsClientHttpRequestFactory httpFactory(int connectionTimeout,
                                                                int connectionRequestTimeout,
-                                                               int readTimeout) {
+                                                               int readTimeout,
+                                                               int maxConnectionTotal,
+                                                               int maxConnectionPerRoute) {
         HttpComponentsClientHttpRequestFactory requestConfig = new HttpComponentsClientHttpRequestFactory();
         requestConfig.setConnectTimeout(connectionTimeout);
         requestConfig.setConnectionRequestTimeout(connectionRequestTimeout);
         requestConfig.setReadTimeout(readTimeout);
-        requestConfig.setHttpClient(httpClient());
+        requestConfig.setHttpClient(httpClient(maxConnectionTotal, maxConnectionPerRoute));
         return requestConfig;
     }
 
-    private org.apache.http.client.HttpClient httpClient() {
+    private org.apache.http.client.HttpClient httpClient(int maxConnectionTotal,
+                                                         int maxConnectionPerRoute) {
         return HttpClientBuilder.create()
-                .setMaxConnTotal(10)
-                .setMaxConnPerRoute(5)
+                .setMaxConnTotal(maxConnectionTotal)
+                .setMaxConnPerRoute(maxConnectionPerRoute)
                 .build();
     }
 }
