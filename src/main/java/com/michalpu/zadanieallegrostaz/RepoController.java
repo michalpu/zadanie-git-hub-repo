@@ -8,28 +8,24 @@ import java.util.List;
 @RestController
 public class RepoController {
     private final RepoService repoService;
-    private final VersionControlClient versionControlClient;
 
-    public RepoController(RepoService repoService, VersionControlClient versionControlClient) {
+    public RepoController(RepoService repoService) {
         this.repoService = repoService;
-        this.versionControlClient = versionControlClient;
     }
 
     @GetMapping("/repos")
-    public List<Repo> getRepos(){
-        Repo[] repos = versionControlClient.getRepos();
-        return repoService.getRepos(repos);
+    public List<Repo> getRepos() {
+        return repoService.getRepos();
     }
 
     @GetMapping("/repos/sorted")
-    public List<Repo> getSortedRepos(){
-        Repo [] repos = versionControlClient.getRepos();
-        return repoService.getSortedRepos(repos);
+    public List<Repo> getSortedRepos() {
+        return repoService.getSortedRepos();
     }
 
     @GetMapping("/repos/newest")
-    public Repo getNewestRepo(){
-        Repo[] repos = versionControlClient.getRepos();
-        return repoService.getNewestRepo(repos);
+    public Repo getNewestRepo() {
+        return repoService.getNewestRepo();
     }
+
 }

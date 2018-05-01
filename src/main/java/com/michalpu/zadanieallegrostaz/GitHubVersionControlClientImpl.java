@@ -1,16 +1,18 @@
 package com.michalpu.zadanieallegrostaz;
 
-import org.springframework.core.env.Environment;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
 
 @Component
-public class GitHubVersionControlClientImpl implements VersionControlClient{
+public class GitHubVersionControlClientImpl implements VersionControlClient {
     private final String gitHubGetReposUrl;
-    private RestTemplate restTemplate = new RestTemplate();
+    private RestTemplate restTemplate;
 
-    public GitHubVersionControlClientImpl(final Environment environment) {
-        this.gitHubGetReposUrl = environment.getProperty("gitHub.client.host") + environment.getProperty("gitHub.client.getRepos");
+    public GitHubVersionControlClientImpl(RestTemplate gitHubRestTemplate, @Value("${gitHub.client.host}") String urlHost,
+                                          @Value("${gitHub.client.getRepos}") String reposUrl) {
+        this.restTemplate = gitHubRestTemplate;
+        this.gitHubGetReposUrl = urlHost + reposUrl;
     }
 
     @Override
